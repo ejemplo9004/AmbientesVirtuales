@@ -3,7 +3,22 @@ guid: 280267a6a5cc3794f88621ff19059d4e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lamparamaceta
+    second: {fileID: 2100000, guid: b8cc58775e01cfa4093925282dffa071, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matas
+    second: {fileID: 2100000, guid: c0f27ab1052590b42a41993ede52c520, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tierra
+    second: {fileID: 2100000, guid: 947ebe6e920738d43afa7baa4496e2b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
