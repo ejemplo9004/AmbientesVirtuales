@@ -3,7 +3,27 @@ guid: 8fa93dba457045f4d91d89bac9b0ea55
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PLANTA2
+    second: {fileID: 2100000, guid: 5461e11684d1fb34497186658ad79dce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TexturaMueble
+    second: {fileID: 2100000, guid: eadf229268f729a47ab7bbdd26a53396, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tierra
+    second: {fileID: 2100000, guid: 0accb9fe610fa2c409f64727b50809a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: planta
+    second: {fileID: 2100000, guid: 4b28fb059c81d8e4ebc5f454f8b1c716, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
