@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class PruebasX : MonoBehaviour
 {
+    public int numero = 5;
     void Update()
     {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-            Escenas.CargarEscena("CIS");
+            Cargar();
 		}
+		if (Input.GetMouseButtonDown(0))
+		{
+            numero--;
+			if (numero < 1)
+			{
+				Cargar();
+			}
+		}
+    }
+
+    public void Cargar()
+	{
+        Escenas.CargarEscena("CIS");
     }
 }
