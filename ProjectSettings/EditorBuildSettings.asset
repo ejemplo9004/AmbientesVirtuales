@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_VE/Scenes/Comunes/0 - CIS/C_CIS.unity
     guid: 7268e30b0145ae247a48ca3e2ef7d0ef
+  - enabled: 1
+    path: Assets/_VE/Scenes/Test/HP_CIS.unity
+    guid: cf07cfa825e80734299c8343278c1de5
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1eda1a1123766b946a5d2f932f6b5d2e, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 5b818503f37176449a10790c6e281fe5, type: 2}
