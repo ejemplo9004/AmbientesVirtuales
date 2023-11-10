@@ -8,10 +8,13 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Morion Anima", menuName = "Morion/Perfil de Animacion UI")]
 public class CambioTama : ScriptableObject
 {
-    public bool autoInicializar = true;
+    public bool autoReiniciar = true;
+    public bool cambiarTransformacion;
+    [ConditionalHide("cambiarTransformacion", true)]
     public Rect rectanguloInicial;
+    [ConditionalHide("cambiarTransformacion", true)]
     public Rect rectanguloFinal;
-    public AnimationCurve curva;
+    public AnimationCurve curva = AnimationCurve.Linear(0, 0, 1, 1);
     public float duracion = 1;
     public float offset = 0;
 

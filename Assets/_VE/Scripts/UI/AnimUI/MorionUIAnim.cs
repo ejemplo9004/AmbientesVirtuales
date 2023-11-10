@@ -82,12 +82,16 @@ public class MorionUIAnim : MonoBehaviour
 public class CambioTamaInterno
 {
     RectTransform rt;
-    public bool autoInicializar;
+    public bool autoReiniciar;
     public CambioTama perfil;
     public UnityEvent eventoAlIniciar;
+    public bool cambiarTransformacion;
+    [ConditionalHide("cambiarTransformacion", true)]
     public Rect rectanguloInicial;
+    [ConditionalHide("cambiarTransformacion", true)]
     public Rect rectanguloFinal;
-    public AnimationCurve curva;
+    [Header("-----")]
+    public AnimationCurve curva = AnimationCurve.Linear(0,0,1,1);
     public float duracion = 1;
     public float offset = 0;
 
@@ -101,12 +105,13 @@ public class CambioTamaInterno
 
     public UnityEvent eventoAlFinalizar;
 
+    bool bloqueado = false;
     public void Inicializar(RectTransform r)
 	{
         rt = r;
 		if (perfil != null)
         {
-            autoInicializar = perfil.autoInicializar;
+            autoReiniciar = perfil.autoReiniciar;
             rectanguloInicial = perfil.rectanguloInicial;
             rectanguloFinal = perfil.rectanguloFinal;
             curva = perfil.curva;
@@ -114,8 +119,9 @@ public class CambioTamaInterno
             offset = perfil.offset;
             colorInicial = perfil.colorInicial;
             colorFinal = perfil.colorFinal;
+            cambiarTransformacion = perfil.cambiarTransformacion;
 		}
-		if (autoInicializar)
+		if (autoReiniciar)
         {
             Reiniciar();
         }
@@ -123,10 +129,13 @@ public class CambioTamaInterno
 
     public void Reiniciar()
 	{
-        Vector3 bPos = new Vector3(rectanguloInicial.position.x, rectanguloInicial.position.y, 0);
-        Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
-        rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, 0);
-        rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, 0);
+		if (cambiarTransformacion)
+		{
+            Vector3 bPos = new Vector3(rectanguloInicial.position.x, rectanguloInicial.position.y, 0);
+            Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
+            rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, 0);
+            rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, 0);
+		}
         if (imagen != null && tieneImagen) 
             imagen.color = Color.Lerp(colorInicial, colorFinal, 0);
     }
@@ -136,21 +145,29 @@ public class CambioTamaInterno
     }
     IEnumerator Restaurar()
     {
-        eventoAlIniciar.Invoke();
-        yield return new WaitForSeconds(offset);
-        Vector3 bPos = new Vector3(rectanguloInicial.position.x, rectanguloInicial.position.y, 0);
-        Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
-        for (int i = 0; i <= 20; i++)
-        {
-            float t = curva.Evaluate(i / 20f);
-            yield return new WaitForSeconds(duracion / 20f);
-            rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, t);
-            rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, t);
-			if (imagen != null && tieneImagen)
-			{
-                imagen.color = Color.Lerp(colorInicial, colorFinal, t);
-			}
-        }
-        eventoAlFinalizar.Invoke();
+		if (!bloqueado)
+		{
+            bloqueado = true;
+            eventoAlIniciar.Invoke();
+            yield return new WaitForSeconds(offset);
+            Vector3 bPos = new Vector3(rectanguloInicial.position.x, rectanguloInicial.position.y, 0);
+            Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
+            for (int i = 0; i <= 20; i++)
+            {
+                float t = curva.Evaluate(i / 20f);
+                yield return new WaitForSeconds(duracion / 20f);
+			    if (cambiarTransformacion)
+			    {
+                    rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, t);
+                    rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, t);
+			    }
+			    if (imagen != null && tieneImagen)
+			    {
+                    imagen.color = Color.Lerp(colorInicial, colorFinal, t);
+			    }
+            }
+            eventoAlFinalizar.Invoke();
+            bloqueado = false;
+		}
     }
 }
