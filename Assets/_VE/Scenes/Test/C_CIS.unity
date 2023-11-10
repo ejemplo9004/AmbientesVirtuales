@@ -969,7 +969,7 @@ MonoBehaviour:
   m_System: {fileID: 768083255}
   m_TurnAmount: 45
   m_DebounceTime: 0.5
-  m_EnableTurnLeftRight: 1
+  m_EnableTurnLeftRight: 0
   m_EnableTurnAround: 1
   m_LeftHandSnapTurnAction:
     m_UseReference: 1
