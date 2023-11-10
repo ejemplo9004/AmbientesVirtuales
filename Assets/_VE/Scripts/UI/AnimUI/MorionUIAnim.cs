@@ -83,7 +83,11 @@ public class CambioTamaInterno
 {
     RectTransform rt;
     public bool autoReiniciar;
+    public bool usarPerfil;
+    [ConditionalHide("usarPerfil", true)]
     public CambioTama perfil;
+    [ConditionalHide("usarPerfil", true)]
+    public bool reiniciarPerfilAlIniciar;
     public UnityEvent eventoAlIniciar;
     public bool cambiarTransformacion;
     [ConditionalHide("cambiarTransformacion", true)]
@@ -109,17 +113,9 @@ public class CambioTamaInterno
     public void Inicializar(RectTransform r)
 	{
         rt = r;
-		if (perfil != null)
+		if (usarPerfil && perfil != null && reiniciarPerfilAlIniciar)
         {
-            autoReiniciar = perfil.autoReiniciar;
-            rectanguloInicial = perfil.rectanguloInicial;
-            rectanguloFinal = perfil.rectanguloFinal;
-            curva = perfil.curva;
-            duracion = perfil.duracion;
-            offset = perfil.offset;
-            colorInicial = perfil.colorInicial;
-            colorFinal = perfil.colorFinal;
-            cambiarTransformacion = perfil.cambiarTransformacion;
+            CargarPerfil();
 		}
 		if (autoReiniciar)
         {
@@ -127,6 +123,19 @@ public class CambioTamaInterno
         }
 	}
 
+
+    public void CargarPerfil()
+	{
+        autoReiniciar = perfil.autoReiniciar;
+        rectanguloInicial = perfil.rectanguloInicial;
+        rectanguloFinal = perfil.rectanguloFinal;
+        curva = perfil.curva;
+        duracion = perfil.duracion;
+        offset = perfil.offset;
+        colorInicial = perfil.colorInicial;
+        colorFinal = perfil.colorFinal;
+        cambiarTransformacion = perfil.cambiarTransformacion;
+    }
     public void Reiniciar()
 	{
 		if (cambiarTransformacion)
