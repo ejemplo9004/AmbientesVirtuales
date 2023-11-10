@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc564a9783269ae4b9fb4c9196f1eeaa, type: 3}
   m_Name: Morion Anima 1
   m_EditorClassIdentifier: 
+  autoReiniciar: 1
+  cambiarTransformacion: 1
   rectanguloInicial:
     serializedVersion: 2
     x: 0
@@ -59,5 +61,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   duracion: 0.5
   offset: 0.2
+  tieneImagen: 0
   colorInicial: {r: 1, g: 1, b: 1, a: 0}
   colorFinal: {r: 1, g: 0, b: 0, a: 1}

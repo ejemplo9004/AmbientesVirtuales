@@ -274,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 184, y: -120}
+  m_AnchoredPosition: {x: 0, y: -109}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &256103248
@@ -291,10 +291,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rt: {fileID: 0}
   "animacionesTama\xF1o":
-  - perfil: {fileID: 11400000, guid: 496a63c07a3613b419c89ccfd8089bd3, type: 2}
+  - autoReiniciar: 0
+    perfil: {fileID: 11400000, guid: 496a63c07a3613b419c89ccfd8089bd3, type: 2}
     eventoAlIniciar:
       m_PersistentCalls:
         m_Calls: []
+    cambiarTransformacion: 1
     rectanguloInicial:
       serializedVersion: 2
       x: 0
@@ -315,6 +317,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     duracion: 1
     offset: 0
+    tieneImagen: 1
     imagen: {fileID: 256103249}
     colorInicial: {r: 0, g: 0, b: 0, a: 0}
     colorFinal: {r: 0, g: 0, b: 0, a: 0}
@@ -410,24 +413,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac94a6485add1049bacdd284fbd68e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rt: {fileID: 0}
+  rt: {fileID: 775120652}
   "animacionesTama\xF1o":
-  - perfil: {fileID: 11400000, guid: 8ff28a565162d8d489bb6a338b8aa8b2, type: 2}
+  - autoReiniciar: 0
+    perfil: {fileID: 11400000, guid: 8ff28a565162d8d489bb6a338b8aa8b2, type: 2}
     eventoAlIniciar:
       m_PersistentCalls:
         m_Calls: []
+    cambiarTransformacion: 1
     rectanguloInicial:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 0
-      height: 0
+      width: 100
+      height: 100
     rectanguloFinal:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 0
-      height: 0
+      width: 100
+      height: 100
     curva:
       serializedVersion: 2
       m_Curve: []
@@ -436,6 +441,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     duracion: 1
     offset: 0
+    tieneImagen: 1
     imagen: {fileID: 775120654}
     colorInicial: {r: 1, g: 1, b: 1, a: 1}
     colorFinal: {r: 1, g: 1, b: 1, a: 1}
