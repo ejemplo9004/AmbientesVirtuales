@@ -20,7 +20,46 @@ public class MorionUIAnim : MonoBehaviour
             animacionesTamaño[i].Inicializar(rt);
 		}
 	}
-	void Start()
+
+    public void GuardarInicial(int cual)
+    {
+        if (cual < 0 || cual >= animacionesTamaño.Length)
+        {
+            Debug.LogError("Está intentando reproducir una animación fuera del rango: " + cual);
+            return;
+        }
+        if (rt == null)
+        {
+            Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
+            return;
+        }
+        animacionesTamaño[cual].rectanguloInicial.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+        animacionesTamaño[cual].rectanguloInicial.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
+        if (animacionesTamaño[cual].imagen != null && animacionesTamaño[cual].tieneImagen)
+        {
+            animacionesTamaño[cual].colorInicial = animacionesTamaño[cual].imagen.color;
+        }
+    }
+    public void GuardarFinal(int cual)
+    {
+        if (cual < 0 || cual >= animacionesTamaño.Length)
+        {
+            Debug.LogError("Está intentando reproducir una animación fuera del rango: " + cual);
+            return;
+        }
+        if (rt == null)
+        {
+            Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
+            return;
+        }
+        animacionesTamaño[cual].rectanguloFinal.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+        animacionesTamaño[cual].rectanguloFinal.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
+		if (animacionesTamaño[cual].imagen != null && animacionesTamaño[cual].tieneImagen)
+		{
+            animacionesTamaño[cual].colorFinal = animacionesTamaño[cual].imagen.color;
+        }
+    }
+    void Start()
     {
 
     }
@@ -88,7 +127,8 @@ public class CambioTamaInterno
         Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
         rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, 0);
         rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, 0);
-        imagen.color = Color.Lerp(colorInicial, colorFinal, 0);
+        if (imagen != null && tieneImagen) 
+            imagen.color = Color.Lerp(colorInicial, colorFinal, 0);
     }
     public void Iniciar(MonoBehaviour m)
     {
@@ -106,7 +146,7 @@ public class CambioTamaInterno
             yield return new WaitForSeconds(duracion / 20f);
             rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, t);
             rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, t);
-			if (imagen != null)
+			if (imagen != null && tieneImagen)
 			{
                 imagen.color = Color.Lerp(colorInicial, colorFinal, t);
 			}
