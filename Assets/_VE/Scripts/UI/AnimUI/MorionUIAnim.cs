@@ -11,17 +11,18 @@ public class MorionUIAnim : MonoBehaviour
 
 	private void Awake()
 	{
-		for (int i = 0; i < animacionesTamaño.Length; i++)
-		{
-            animacionesTamaño[i].Inicializar();
-		}
-	}
-	void Start()
-    {
 		if (rt == null)
 		{
             rt = GetComponent<RectTransform>();
 		}
+		for (int i = 0; i < animacionesTamaño.Length; i++)
+		{
+            animacionesTamaño[i].Inicializar(rt);
+		}
+	}
+	void Start()
+    {
+
     }
     public void Iniciar(int cual)
     {
@@ -35,13 +36,14 @@ public class MorionUIAnim : MonoBehaviour
             Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
             return;
         }
-        animacionesTamaño[cual].Iniciar(rt, this);
+        animacionesTamaño[cual].Iniciar(this);
     }
 }
 [System.Serializable]
 public class CambioTamaInterno
 {
     RectTransform rt;
+    public bool autoInicializar;
     public CambioTama perfil;
     public UnityEvent eventoAlIniciar;
     public Rect rectanguloInicial;
@@ -50,16 +52,22 @@ public class CambioTamaInterno
     public float duracion = 1;
     public float offset = 0;
 
+    public bool tieneImagen;
+    [ConditionalHide("tieneImagen", true)]
     public Image imagen;
+    [ConditionalHide("tieneImagen", true)]
     public Color colorInicial = Color.white;
+    [ConditionalHide("tieneImagen", true)]
     public Color colorFinal = Color.white;
 
     public UnityEvent eventoAlFinalizar;
 
-    public void Inicializar()
+    public void Inicializar(RectTransform r)
 	{
+        rt = r;
 		if (perfil != null)
-		{
+        {
+            autoInicializar = perfil.autoInicializar;
             rectanguloInicial = perfil.rectanguloInicial;
             rectanguloFinal = perfil.rectanguloFinal;
             curva = perfil.curva;
@@ -68,10 +76,22 @@ public class CambioTamaInterno
             colorInicial = perfil.colorInicial;
             colorFinal = perfil.colorFinal;
 		}
+		if (autoInicializar)
+        {
+            Reiniciar();
+        }
 	}
-    public void Iniciar(RectTransform r, MonoBehaviour m)
+
+    public void Reiniciar()
+	{
+        Vector3 bPos = new Vector3(rectanguloInicial.position.x, rectanguloInicial.position.y, 0);
+        Vector3 nPos = new Vector3(rectanguloFinal.position.x, rectanguloFinal.position.y, 0);
+        rt.sizeDelta = Vector2.LerpUnclamped(rectanguloInicial.size, rectanguloFinal.size, 0);
+        rt.localPosition = Vector3.LerpUnclamped(bPos, nPos, 0);
+        imagen.color = Color.Lerp(colorInicial, colorFinal, 0);
+    }
+    public void Iniciar(MonoBehaviour m)
     {
-        rt = r;
         m.StartCoroutine(Restaurar());
     }
     IEnumerator Restaurar()
