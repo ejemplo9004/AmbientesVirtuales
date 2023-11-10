@@ -3,7 +3,22 @@ guid: ca1aa32f7be621742b50be82bb6d5155
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 7837e641ade240246842708316c3d02a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PNG
+    second: {fileID: 2100000, guid: c3f690e7116b992479c83a5a2122f312, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pantalla
+    second: {fileID: 2100000, guid: bef673c38983118439822df5bd455712, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
