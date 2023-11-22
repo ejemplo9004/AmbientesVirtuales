@@ -3,7 +3,12 @@ guid: c2125f599aa2e1a4ab164ee6a0edc46b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MATERIAL_SILLA_EJECUTIVA_LOWPOLY
+    second: {fileID: 2100000, guid: bb040b64f4fd3eb4aa5ec2e682428543, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 7.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -88,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.074999996
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
