@@ -50,9 +50,11 @@ public class MorionUIAnim : MonoBehaviour
         if (rt == null)
         {
             Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
-            return;
+            rt = this.GetComponent < RectTransform> ();
+            if (rt == null)
+                return;
         }
-        animacionesTamaño[cual].rectanguloFinal.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+        animacionesTamaño[cual].rectanguloFinal.size = new Vector2( rt.sizeDelta.x, rt.sizeDelta.y);
         animacionesTamaño[cual].rectanguloFinal.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
 		if (animacionesTamaño[cual].imagen != null && animacionesTamaño[cual].tieneImagen)
 		{
