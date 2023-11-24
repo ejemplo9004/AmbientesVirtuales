@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_VE/Scenes/Test/PruebasMorion2.unity
+    guid: b5130fcf3dac90342b28932245a29bfd
+  - enabled: 1
     path: Assets/_VE/Scenes/LP/0 - CIS/LP_CIS.unity
     guid: c105c51a81fe871438369c6009b97a9d
   - enabled: 1

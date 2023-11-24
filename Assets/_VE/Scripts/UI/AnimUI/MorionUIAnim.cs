@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class MorionUIAnim : MonoBehaviour
 {
     public RectTransform rt;
-    public CambioTamaInterno[] animacionesTamaño;
+    public CambioTamaInterno[] animacionesTamaÃ±o;
 
 	private void Awake()
 	{
@@ -15,48 +15,56 @@ public class MorionUIAnim : MonoBehaviour
 		{
             rt = GetComponent<RectTransform>();
 		}
-		for (int i = 0; i < animacionesTamaño.Length; i++)
+		for (int i = 0; i < animacionesTamaÃ±o.Length; i++)
 		{
-            animacionesTamaño[i].Inicializar(rt);
+            animacionesTamaÃ±o[i].Inicializar(rt);
 		}
 	}
 
     public void GuardarInicial(int cual)
     {
-        if (cual < 0 || cual >= animacionesTamaño.Length)
+        if (cual < 0 || cual >= animacionesTamaÃ±o.Length)
         {
-            Debug.LogError("Está intentando reproducir una animación fuera del rango: " + cual);
+            Debug.LogError("Estï¿½ intentando reproducir una animaciï¿½n fuera del rango: " + cual);
             return;
         }
         if (rt == null)
         {
-            Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
-            return;
+            rt = GetComponent<RectTransform>();
+            if (rt == null)
+            {
+                Debug.LogError("No hay un Rect Transform Objetivo para la animaciï¿½n.");
+                return;
+            }
         }
-        animacionesTamaño[cual].rectanguloInicial.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
-        animacionesTamaño[cual].rectanguloInicial.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
-        if (animacionesTamaño[cual].imagen != null && animacionesTamaño[cual].tieneImagen)
+        animacionesTamaÃ±o[cual].rectanguloInicial.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+        animacionesTamaÃ±o[cual].rectanguloInicial.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
+        if (animacionesTamaÃ±o[cual].imagen != null && animacionesTamaÃ±o[cual].tieneImagen)
         {
-            animacionesTamaño[cual].colorInicial = animacionesTamaño[cual].imagen.color;
+            animacionesTamaÃ±o[cual].colorInicial = animacionesTamaÃ±o[cual].imagen.color;
         }
     }
     public void GuardarFinal(int cual)
     {
-        if (cual < 0 || cual >= animacionesTamaño.Length)
+        if (cual < 0 || cual >= animacionesTamaÃ±o.Length)
         {
-            Debug.LogError("Está intentando reproducir una animación fuera del rango: " + cual);
+            Debug.LogError("Estï¿½ intentando reproducir una animaciï¿½n fuera del rango: " + cual);
             return;
         }
         if (rt == null)
         {
-            Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
-            return;
+            rt = GetComponent<RectTransform>();
+            if (rt == null)
+            {
+                Debug.LogError("No hay un Rect Transform Objetivo para la animaciï¿½n.");
+                return;
+            }
         }
-        animacionesTamaño[cual].rectanguloFinal.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
-        animacionesTamaño[cual].rectanguloFinal.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
-		if (animacionesTamaño[cual].imagen != null && animacionesTamaño[cual].tieneImagen)
+        animacionesTamaÃ±o[cual].rectanguloFinal.size = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
+        animacionesTamaÃ±o[cual].rectanguloFinal.position = new Vector2(rt.localPosition.x, rt.localPosition.y);
+		if (animacionesTamaÃ±o[cual].imagen != null && animacionesTamaÃ±o[cual].tieneImagen)
 		{
-            animacionesTamaño[cual].colorFinal = animacionesTamaño[cual].imagen.color;
+            animacionesTamaÃ±o[cual].colorFinal = animacionesTamaÃ±o[cual].imagen.color;
         }
     }
     void Start()
@@ -65,17 +73,21 @@ public class MorionUIAnim : MonoBehaviour
     }
     public void Iniciar(int cual)
     {
-		if (cual < 0 || cual >= animacionesTamaño.Length)
+		if (cual < 0 || cual >= animacionesTamaÃ±o.Length)
 		{
-            Debug.LogError("Está intentando reproducir una animación fuera del rango: " + cual);
+            Debug.LogError("Estï¿½ intentando reproducir una animaciï¿½n fuera del rango: " + cual);
             return;
 		}
 		if (rt == null)
         {
-            Debug.LogError("No hay un Rect Transform Objetivo para la animación.");
-            return;
+            rt = GetComponent<RectTransform>();
+            if (rt == null)
+            {
+                Debug.LogError("No hay un Rect Transform Objetivo para la animaciï¿½n.");
+                return;
+            }
         }
-        animacionesTamaño[cual].Iniciar(this);
+        animacionesTamaÃ±o[cual].Iniciar(this);
     }
 }
 [System.Serializable]
