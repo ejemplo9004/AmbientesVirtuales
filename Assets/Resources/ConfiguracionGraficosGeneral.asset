@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ConfiguracionGraficosGeneral
   m_EditorClassIdentifier: 
   tipoGraficos: 0
+  plataformas: 0

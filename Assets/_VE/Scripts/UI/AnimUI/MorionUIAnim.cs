@@ -25,7 +25,7 @@ public class MorionUIAnim : MonoBehaviour
     {
         if (cual < 0 || cual >= animacionesTamaño.Length)
         {
-            Debug.LogError("Est� intentando reproducir una animaci�n fuera del rango: " + cual);
+            Debug.LogError("Esta intentando reproducir una animaci�n fuera del rango: " + cual);
             return;
         }
         if (rt == null)
@@ -33,7 +33,7 @@ public class MorionUIAnim : MonoBehaviour
             rt = GetComponent<RectTransform>();
             if (rt == null)
             {
-                Debug.LogError("No hay un Rect Transform Objetivo para la animaci�n.");
+                Debug.LogError("No hay un Rect Transform Objetivo para la animacion.");
                 return;
             }
         }
@@ -48,7 +48,7 @@ public class MorionUIAnim : MonoBehaviour
     {
         if (cual < 0 || cual >= animacionesTamaño.Length)
         {
-            Debug.LogError("Est� intentando reproducir una animaci�n fuera del rango: " + cual);
+            Debug.LogError("Esta intentando reproducir una animacion fuera del rango: " + cual);
             return;
         }
         if (rt == null)
@@ -56,7 +56,7 @@ public class MorionUIAnim : MonoBehaviour
             rt = GetComponent<RectTransform>();
             if (rt == null)
             {
-                Debug.LogError("No hay un Rect Transform Objetivo para la animaci�n.");
+                Debug.LogError("No hay un Rect Transform Objetivo para la animacion.");
                 return;
             }
         }
@@ -75,7 +75,7 @@ public class MorionUIAnim : MonoBehaviour
     {
 		if (cual < 0 || cual >= animacionesTamaño.Length)
 		{
-            Debug.LogError("Est� intentando reproducir una animaci�n fuera del rango: " + cual);
+            Debug.LogError("Esta intentando reproducir una animacion fuera del rango: " + cual);
             return;
 		}
 		if (rt == null)
@@ -83,7 +83,7 @@ public class MorionUIAnim : MonoBehaviour
             rt = GetComponent<RectTransform>();
             if (rt == null)
             {
-                Debug.LogError("No hay un Rect Transform Objetivo para la animaci�n.");
+                Debug.LogError("No hay un Rect Transform Objetivo para la animacion.");
                 return;
             }
         }

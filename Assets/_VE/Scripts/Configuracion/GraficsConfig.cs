@@ -1,40 +1,62 @@
+// Importa las bibliotecas necesarias
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+// Si se está utilizando el Editor de Unity, importa la biblioteca de UnityEditor
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-[CreateAssetMenu(menuName ="Configuracion/Configuracion de graficos")]
 
+/// <summary>
+/// Clase que representa la configuración de gráficos como un ScriptableObject.
+/// </summary>
+[CreateAssetMenu(menuName = "Configuracion/Configuracion de graficos")]
 public class GraficsConfig : ScriptableObject
 {
+    /// <summary>
+    /// Tipo de gráficos seleccionados (bajos, medios, altos).
+    /// </summary>
     public TipoGraficos tipoGraficos;
-    public Plataformas  plataformas;
 
+    /// <summary>
+    /// Plataformas seleccionadas mediante flags (Movil, Windows, VR).
+    /// </summary>
+    public Plataformas plataformas;
+
+    /// <summary>
+    /// Obtiene un prefijo basado en el tipo de gráficos seleccionado.
+    /// </summary>
+    /// <returns>El prefijo correspondiente al tipo de gráficos.</returns>
     public string GetPrefijo()
-	{
-		switch (tipoGraficos)
-		{
-			case TipoGraficos.bajos:
-				return "LP";
-			case TipoGraficos.medios:
-				return "MP";
-			case TipoGraficos.altos:
-				return "HP";
-		}
-		return "";
-	}
+    {
+        switch (tipoGraficos)
+        {
+            case TipoGraficos.bajos:
+                return "LP";
+            case TipoGraficos.medios:
+                return "MP";
+            case TipoGraficos.altos:
+                return "HP";
+        }
+        return "";
+    }
 }
 
+/// <summary>
+/// Enumeración que representa los niveles de gráficos (bajos, medios, altos).
+/// </summary>
 public enum TipoGraficos
 {
-	bajos = 0,
-	medios = 1,
-	altos = 2
+    bajos = 0,
+    medios = 1,
+    altos = 2
 }
 
+/// <summary>
+/// Enumeración de Flags que representa las plataformas disponibles (Movil, Windows, VR).
+/// </summary>
 [System.Flags]
 public enum Plataformas
 {
@@ -44,10 +66,22 @@ public enum Plataformas
     VR = 1 << 3
 }
 
+/// <summary>
+/// Clase sellada que define un atributo de EnumFlags para ser utilizado en la interfaz del editor.
+/// </summary>
 public sealed class EnumFlagsAttribute : PropertyAttribute
 {
+    /// <summary>
+    /// Constructor por defecto de EnumFlagsAttribute.
+    /// </summary>
     public EnumFlagsAttribute() { }
 
+    /// <summary>
+    /// Obtiene los índices de las opciones seleccionadas en la enumeración.
+    /// </summary>
+    /// <typeparam name="T">Tipo de la enumeración.</typeparam>
+    /// <param name="val">Valor de la enumeración con flags.</param>
+    /// <returns>Lista de índices de las opciones seleccionadas.</returns>
     public static List<int> GetSelectedIndexes<T>(T val) where T : IConvertible
     {
         List<int> selectedIndexes = new List<int>();
@@ -61,6 +95,13 @@ public sealed class EnumFlagsAttribute : PropertyAttribute
         }
         return selectedIndexes;
     }
+
+    /// <summary>
+    /// Obtiene las cadenas de las opciones seleccionadas en la enumeración.
+    /// </summary>
+    /// <typeparam name="T">Tipo de la enumeración.</typeparam>
+    /// <param name="val">Valor de la enumeración con flags.</param>
+    /// <returns>Lista de cadenas de las opciones seleccionadas.</returns>
     public static List<string> GetSelectedStrings<T>(T val) where T : IConvertible
     {
         List<string> selectedStrings = new List<string>();
@@ -75,12 +116,24 @@ public sealed class EnumFlagsAttribute : PropertyAttribute
         return selectedStrings;
     }
 }
+
+// Si se está utilizando el Editor de Unity, define un PropertyDrawer para el atributo EnumFlags
 #if UNITY_EDITOR
+/// <summary>
+/// Clase que define el dibujante personalizado para el atributo EnumFlags.
+/// </summary>
 [CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
 public class EnumFlagsAttributeDrawer : PropertyDrawer
 {
+    /// <summary>
+    /// Sobrescribe el método OnGUI para personalizar la interfaz del editor.
+    /// </summary>
+    /// <param name="position">Rectángulo de posición del campo en el Editor.</param>
+    /// <param name="property">Propiedad serializada asociada al campo.</param>
+    /// <param name="label">Etiqueta del campo.</param>
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        // Utiliza EditorGUI.MaskField para mostrar un campo de máscara de bits en el Editor
         property.intValue = EditorGUI.MaskField(position, label, property.intValue, property.enumNames);
     }
 }
