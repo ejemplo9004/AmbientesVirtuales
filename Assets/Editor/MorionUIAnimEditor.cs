@@ -26,6 +26,10 @@ public class MorionUIAnimEditor : Editor
 			{
 				cam.GuardarFinal(i);
 			}
+			if (cam.animacionesTamaño[i].usarPerfil && cam.animacionesTamaño[i].perfil != null && GUILayout.Button("Cargar Perfil - " + i))
+			{
+				cam.animacionesTamaño[i].CargarPerfil();
+			}
 		}
 	}
 }

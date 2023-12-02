@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CIS_Textura
-  m_Shader: {fileID: -6465566751694194690, guid: 4f97c9ca18379c24881c2088746e9e17, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7d34e6d6c24e3134f813d806b2eb05cd, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -123,6 +123,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SliderBase: 1
+    - _SliderEmisivo: 1
+    - _SliderMetal: 1
+    - _SliderNormal: 1
+    - _SliderSmooth: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
