@@ -61,12 +61,24 @@ public class GraficsConfig : ScriptableObject
     }
 
     public bool VerificarPlataforma(Plataformas plataformas)
-	{
-        string[] p = plataformas.ToString().Replace(" ","").Split(",");
+    {
+        string[] p = plataformas.ToString().Replace(" ", "").Split(",");
         for (int i = 0; i < p.Length; i++)
-		{
-			if (p[i].ToString() == plataformaObjetivo.ToString())
-			{
+        {
+            if (p[i].ToString() == plataformaObjetivo.ToString())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool VerificarPlataforma(Plataformas plataformas, Plataforma plataforma)
+    {
+        string[] p = plataformas.ToString().Replace(" ", "").Split(",");
+        for (int i = 0; i < p.Length; i++)
+        {
+            if (p[i].ToString() == plataforma.ToString())
+            {
                 return true;
             }
         }

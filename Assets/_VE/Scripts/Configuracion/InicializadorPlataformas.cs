@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(PlayerControl))]
 
 public class InicializadorPlataformas : MonoBehaviour
 {
     public ElementosDesactivables[] elementosDesactibables;
+    PlayerControl playerControl;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        playerControl = GetComponent<PlayerControl>();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
+		if (playerControl.esPropio)
+		{
+            playerControl.plataforma.Value = GraficsConfig.configuracionDefault.plataformaObjetivo;
+        }
         for (int i = 0; i < elementosDesactibables.Length; i++)
 		{
-            elementosDesactibables[i].Inicializar();
+            elementosDesactibables[i].Inicializar(playerControl);
 		}
     }
 
@@ -32,19 +39,36 @@ public class ElementosDesactivables
     public GameObject[] objetos;
     public Plataformas plataformas;
     public bool dependeSerOwner;
-    [ConditionalHide("dependeSerOwner", true)]
-    public PlayerControl playerControl;
 
-    public void Inicializar()
+    public void Inicializar(PlayerControl playerControl)
 	{
-        bool activo = GraficsConfig.configuracionDefault.VerificarPlataforma(plataformas);
-		if (dependeSerOwner && playerControl != null)
+		if (playerControl != null)
 		{
-            activo = activo && playerControl.esPropio;
+			if (playerControl.esPropio)
+			{
+                bool activo = GraficsConfig.configuracionDefault.VerificarPlataforma(plataformas);
+                if (dependeSerOwner)
+		        {
+                    activo = activo && playerControl.esPropio;
+		        }
+                for (int i = 0; i < objetos.Length; i++)
+		        {
+                    objetos[i].SetActive(activo);
+                }
+			}
+			else
+			{
+                bool activo = GraficsConfig.configuracionDefault.VerificarPlataforma(plataformas, playerControl.plataforma.Value);
+                if (dependeSerOwner)
+                {
+                    activo = activo && playerControl.esPropio;
+                }
+                for (int i = 0; i < objetos.Length; i++)
+                {
+                    objetos[i].SetActive(activo);
+                }
+            }
 		}
-        for (int i = 0; i < objetos.Length; i++)
-		{
-            objetos[i].SetActive(activo);
-        }
+
 	}
 }

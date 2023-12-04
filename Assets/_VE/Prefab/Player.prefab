@@ -2063,6 +2063,8 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkPlayerState:
     m_InternalValue: 0
+  plataforma:
+    m_InternalValue: 0
   esPropio: 0
   accionMovimiento:
     m_UseReference: 1
@@ -2111,22 +2113,18 @@ MonoBehaviour:
     - {fileID: 919132147547488988}
     plataformas: 6
     dependeSerOwner: 0
-    playerControl: {fileID: 0}
   - objetos:
     - {fileID: 768083250}
     plataformas: 16
     dependeSerOwner: 0
-    playerControl: {fileID: 0}
   - objetos:
     - {fileID: 961739749}
     plataformas: 16
     dependeSerOwner: 1
-    playerControl: {fileID: 5517683223056939610}
   - objetos:
     - {fileID: 501757308532793801}
     plataformas: 6
     dependeSerOwner: 1
-    playerControl: {fileID: 5517683223056939610}
 --- !u!1001 &1140477607
 PrefabInstance:
   m_ObjectHideFlags: 0
