@@ -89,7 +89,11 @@ public class PlayerControl : NetworkBehaviour
         {
             ClientInput();
 
+			if (plataforma.Value != (int)GraficsConfig.configuracionDefault.plataformaObjetivo)
+			{
+                ConfigurarPlataforma();
 
+            }
 
         }
         ClientMoveAndRotate();
