@@ -31,7 +31,11 @@ public class PlayerControl : NetworkBehaviour
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
     [SerializeField]
-    public NetworkVariable<int> plataforma = new NetworkVariable<int>();
+    public NetworkVariable<int> plataforma = new NetworkVariable<int>(
+        value: 0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+        );
 
     private CharacterController characterController;
     //private Animator animator;
