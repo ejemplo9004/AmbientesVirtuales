@@ -73,10 +73,28 @@ public class PlayerControl : NetworkBehaviour
 
     private void Update()
     {
+
+        esPropio = IsClient && IsOwner;
         //esPropio = IsClient && IsOwner;
         if (IsClient && IsOwner)
         {
             ClientInput();
+
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                plataforma.Value = 1;
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                plataforma.Value = 3;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                plataforma.Value = 5;
+            }
+
+
         }
         ClientMoveAndRotate();
         ClientVisuals();
