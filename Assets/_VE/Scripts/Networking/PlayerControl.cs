@@ -56,6 +56,7 @@ public class PlayerControl : NetworkBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        gameObject.name = "Jugador" + Random.Range(0, 14789);
         //animator = GetComponent<Animator>();
     }
  //   [ServerRpc(RequireOwnership = false)]
@@ -83,7 +84,6 @@ public class PlayerControl : NetworkBehaviour
     void ConfigurarPlataforma()
 	{
         plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
-        posConfigurar();
     }
 
     private void Update()
@@ -194,6 +194,8 @@ public class PlayerControl : NetworkBehaviour
         plataforma.OnValueChanged += (oldVal, newVal) =>
         {
             print("Valor anterior de plataforma: " + oldVal.ToString() + " - nuevo: " + newVal.ToString());
+
+            posConfigurar();
         };
 	}
 }

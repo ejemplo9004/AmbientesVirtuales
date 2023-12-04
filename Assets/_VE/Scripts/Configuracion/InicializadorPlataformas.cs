@@ -31,7 +31,7 @@ public class InicializadorPlataformas : MonoBehaviour
         {
             elementosDesactibables[i].Inicializar(playerControl);
         }
-        print("Inicializado");
+        print("Inicializado " + gameObject.name);
     }
 
     // Update is called once per frame
