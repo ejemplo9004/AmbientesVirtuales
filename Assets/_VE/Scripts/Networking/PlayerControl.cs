@@ -31,7 +31,7 @@ public class PlayerControl : NetworkBehaviour
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
     [SerializeField]
-    public NetworkVariable<Plataforma> plataforma = new NetworkVariable<Plataforma>();
+    public NetworkVariable<int> plataforma = new NetworkVariable<int>();
 
     private CharacterController characterController;
     //private Animator animator;
@@ -49,12 +49,18 @@ public class PlayerControl : NetworkBehaviour
         characterController = GetComponent<CharacterController>();
         //animator = GetComponent<Animator>();
     }
+ //   [ServerRpc(RequireOwnership = false)]
+ //   void ConfigurarPlataformaServerRpc()
+	//{
+ //   }
     private void Start()
     {
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
+            plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
+            //ConfigurarPlataformaServerRpc();
             //camara.SetActive(true);
         }
         //else
@@ -157,4 +163,13 @@ public class PlayerControl : NetworkBehaviour
     {
         networkPlayerState.Value = newState;
     }
+
+	public override void OnNetworkSpawn()
+	{
+		base.OnNetworkSpawn();
+        plataforma.OnValueChanged += (oldVal, newVal) =>
+        {
+            print("Valor anterior de plataforma: " + oldVal.ToString() + " - nuevo: " + newVal.ToString());
+        };
+	}
 }

@@ -16,7 +16,7 @@ public class InicializadorPlataformas : MonoBehaviour
         yield return new WaitForEndOfFrame();
 		if (playerControl.esPropio)
 		{
-            playerControl.plataforma.Value = GraficsConfig.configuracionDefault.plataformaObjetivo;
+            playerControl.plataforma.Value = (int) GraficsConfig.configuracionDefault.plataformaObjetivo;
         }
         for (int i = 0; i < elementosDesactibables.Length; i++)
 		{
