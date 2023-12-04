@@ -63,7 +63,7 @@ public class PlayerControl : NetworkBehaviour
         {
             transform.position = new Vector3(Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
-            plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
+            Invoke("ConfigurarPlataforma", 1);
             //ConfigurarPlataformaServerRpc();
             //camara.SetActive(true);
         }
@@ -75,6 +75,11 @@ public class PlayerControl : NetworkBehaviour
         esPropio = IsClient && IsOwner;
     }
 
+    void ConfigurarPlataforma()
+	{
+        plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
+    }
+
     private void Update()
     {
 
@@ -84,19 +89,6 @@ public class PlayerControl : NetworkBehaviour
         {
             ClientInput();
 
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                plataforma.Value = 1;
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                plataforma.Value = 3;
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                plataforma.Value = 5;
-            }
 
 
         }
