@@ -48,6 +48,11 @@ public class PlayerControl : NetworkBehaviour
 
     public InputActionProperty accionMovimiento;
 
+
+    public delegate void PosConfigurar();
+
+    public PosConfigurar posConfigurar;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -78,6 +83,7 @@ public class PlayerControl : NetworkBehaviour
     void ConfigurarPlataforma()
 	{
         plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
+        posConfigurar();
     }
 
     private void Update()
