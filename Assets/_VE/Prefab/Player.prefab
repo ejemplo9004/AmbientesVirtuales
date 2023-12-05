@@ -575,7 +575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &768083253
 Transform:
   m_ObjectHideFlags: 0
@@ -1683,7 +1683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7703301082015206441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2327,6 +2327,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3038a971095d40344b41488d69eed17f, type: 3}
       propertyPath: m_Name
       value: concept2@Breathing Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3038a971095d40344b41488d69eed17f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3183749884578473501, guid: 3038a971095d40344b41488d69eed17f, type: 3}
       propertyPath: m_LocalRotation.x
