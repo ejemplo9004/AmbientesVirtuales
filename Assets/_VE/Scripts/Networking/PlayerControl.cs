@@ -31,7 +31,11 @@ public class PlayerControl : NetworkBehaviour
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
     [SerializeField]
-    public NetworkVariable<Plataforma> plataforma = new NetworkVariable<Plataforma>();
+    public NetworkVariable<int> plataforma = new NetworkVariable<int>(
+        value: 0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+        );
 
     private CharacterController characterController;
     //private Animator animator;
@@ -44,17 +48,29 @@ public class PlayerControl : NetworkBehaviour
 
     public InputActionProperty accionMovimiento;
 
+
+    public delegate void PosConfigurar();
+
+    public PosConfigurar posConfigurar;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        gameObject.name = "Jugador" + Random.Range(0, 14789);
         //animator = GetComponent<Animator>();
     }
+ //   [ServerRpc(RequireOwnership = false)]
+ //   void ConfigurarPlataformaServerRpc()
+	//{
+ //   }
     private void Start()
     {
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
+            Invoke("ConfigurarPlataforma", 1);
+            //ConfigurarPlataformaServerRpc();
             //camara.SetActive(true);
         }
         //else
@@ -65,12 +81,26 @@ public class PlayerControl : NetworkBehaviour
         esPropio = IsClient && IsOwner;
     }
 
+    void ConfigurarPlataforma()
+	{
+        plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
+    }
+
     private void Update()
     {
+
+        esPropio = IsClient && IsOwner;
         //esPropio = IsClient && IsOwner;
         if (IsClient && IsOwner)
         {
             ClientInput();
+
+			if (plataforma.Value != (int)GraficsConfig.configuracionDefault.plataformaObjetivo)
+			{
+                ConfigurarPlataforma();
+
+            }
+
         }
         ClientMoveAndRotate();
         ClientVisuals();
@@ -157,4 +187,15 @@ public class PlayerControl : NetworkBehaviour
     {
         networkPlayerState.Value = newState;
     }
+
+	public override void OnNetworkSpawn()
+	{
+		base.OnNetworkSpawn();
+        plataforma.OnValueChanged += (oldVal, newVal) =>
+        {
+            print("Valor anterior de plataforma: " + oldVal.ToString() + " - nuevo: " + newVal.ToString());
+
+            posConfigurar();
+        };
+	}
 }

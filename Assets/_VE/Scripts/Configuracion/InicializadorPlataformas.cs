@@ -12,16 +12,26 @@ public class InicializadorPlataformas : MonoBehaviour
     IEnumerator Start()
     {
         playerControl = GetComponent<PlayerControl>();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-		if (playerControl.esPropio)
+		if (playerControl != null)
 		{
-            playerControl.plataforma.Value = GraficsConfig.configuracionDefault.plataformaObjetivo;
+            playerControl.posConfigurar += IniciarTodo;
+		}
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        IniciarTodo();
+    }
+
+    public void IniciarTodo()
+	{
+        if (playerControl.esPropio)
+        {
+            playerControl.plataforma.Value = (int)GraficsConfig.configuracionDefault.plataformaObjetivo;
         }
         for (int i = 0; i < elementosDesactibables.Length; i++)
-		{
+        {
             elementosDesactibables[i].Inicializar(playerControl);
-		}
+        }
+        print("Inicializado " + gameObject.name);
     }
 
     // Update is called once per frame

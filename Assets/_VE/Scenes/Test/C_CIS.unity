@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_NetworkManager: {fileID: 1533763151}
   PooledPrefabsList:
   - Prefab: {fileID: 2465217113092882563, guid: c4c7043f206605b49b83e4e4da3d09d8, type: 3}
-    PrewarmCount: 10000
+    PrewarmCount: 1
 --- !u!4 &1433539034
 Transform:
   m_ObjectHideFlags: 0
