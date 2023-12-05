@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControl : NetworkBehaviour
 {
@@ -29,21 +30,24 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
 
-    private CharacterController characterController;
-    private Animator animator;
-    public GameObject camara;
+    [SerializeField]
+    public NetworkVariable<Plataforma> plataforma = new NetworkVariable<Plataforma>();
 
-    //client caches positions
-    private Vector3 oldForwardBackPosition;
-    private Vector3 oldLeftRightPosition; // client caches positions
+    private CharacterController characterController;
+    //private Animator animator;
+    //public GameObject camara;
+
     private Vector3 oldInputPosition = Vector3.zero;
     private Vector3 oldInputRotation = Vector3.zero;
-    private PlayerState oldPlayerState = PlayerState.Idle;
+
+    public bool esPropio;
+
+    public InputActionProperty accionMovimiento;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -51,17 +55,19 @@ public class PlayerControl : NetworkBehaviour
         {
             transform.position = new Vector3(Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y), 0,
                    Random.Range(defaultInitialPositionOnPlane.x, defaultInitialPositionOnPlane.y));
-            camara.SetActive(true);
+            //camara.SetActive(true);
         }
-        else
-        {
-            camara.SetActive(false);
-        }
-        
+        //else
+        //{
+        //    camara.SetActive(false);
+        //}
+        accionMovimiento.action.Enable();
+        esPropio = IsClient && IsOwner;
     }
 
     private void Update()
     {
+        //esPropio = IsClient && IsOwner;
         if (IsClient && IsOwner)
         {
             ClientInput();
@@ -73,10 +79,10 @@ public class PlayerControl : NetworkBehaviour
     private void ClientInput()
     {
         //player position and rotation input
-        Vector3 inputRotation = new Vector3(0, Input.GetAxis("Horizontal"), 0);
+        Vector3 inputRotation = Vector3.up * accionMovimiento.action.ReadValue<Vector2>().x;
 
         Vector3 direction = transform.TransformDirection(Vector3.forward);
-        float forwardInput = Input.GetAxis("Vertical");
+        float forwardInput = accionMovimiento.action.ReadValue<Vector2>().y;
         Vector3 inputPosition = direction * forwardInput;
 
         if (oldInputPosition != inputPosition || oldInputRotation != inputRotation)
@@ -106,14 +112,14 @@ public class PlayerControl : NetworkBehaviour
     {
         if (networkPlayerState.Value == PlayerState.Walk)
         {
-            animator.SetFloat("Walk", 1);
+            //animator.SetFloat("Walk", 1);
         }else if (networkPlayerState.Value == PlayerState.ReverseWalk)
         {
-            animator.SetFloat("Walk", -1);
+            //animator.SetFloat("Walk", -1);
         }
         else
         {
-            animator.SetFloat("Walk", 0);
+            //animator.SetFloat("Walk", 0);
         }
     }
 

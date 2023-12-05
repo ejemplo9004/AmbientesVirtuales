@@ -23,7 +23,7 @@ public class GraficsConfig : ScriptableObject
     /// <summary>
     /// Plataformas seleccionadas mediante flags (Movil, Windows, VR).
     /// </summary>
-    public Plataformas plataformas;
+    public Plataforma plataformaObjetivo;
 
     /// <summary>
     /// Obtiene un prefijo basado en el tipo de gráficos seleccionado.
@@ -41,6 +41,48 @@ public class GraficsConfig : ScriptableObject
                 return "HP";
         }
         return "";
+    }
+    /// <summary>
+    /// Devuelve una lista de plataformas que hayan sido seleccionadas en el enum multiseleccionable
+    /// </summary>
+
+
+    public static GraficsConfig configuracionDefault
+    {
+        get
+        {
+            return Resources.Load<GraficsConfig>("ConfiguracionGraficosGeneral");
+        }
+
+        set
+        {
+            configuracionDefault = value;
+        }
+    }
+
+    public bool VerificarPlataforma(Plataformas plataformas)
+    {
+        string[] p = plataformas.ToString().Replace(" ", "").Split(",");
+        for (int i = 0; i < p.Length; i++)
+        {
+            if (p[i].ToString() == plataformaObjetivo.ToString())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool VerificarPlataforma(Plataformas plataformas, Plataforma plataforma)
+    {
+        string[] p = plataformas.ToString().Replace(" ", "").Split(",");
+        for (int i = 0; i < p.Length; i++)
+        {
+            if (p[i].ToString() == plataforma.ToString())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
@@ -63,9 +105,19 @@ public enum Plataformas
     Nada = 0,
     Movil = 1 << 1,
     Windows = 1 << 2,
-    VR = 1 << 3
+    VR = 1 << 4
 }
 
+/// <summary>
+/// Enumeración de Flags que representa las plataformas disponibles (Movil, Windows, VR).
+/// </summary>
+public enum Plataforma
+{
+    Nada = 0,
+    Movil = 1,
+    Windows = 2,
+    VR = 4
+}
 /// <summary>
 /// Clase sellada que define un atributo de EnumFlags para ser utilizado en la interfaz del editor.
 /// </summary>
