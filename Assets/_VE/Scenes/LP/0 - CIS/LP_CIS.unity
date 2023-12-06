@@ -14223,13 +14223,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1068228302463275750, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068228302591560446, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1068228303099105076, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963846367}
+    - target: {fileID: 1068228303099105081, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1953672207579283164, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953672208696053611, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1953672208771005648, guid: ea29fffb94d8cc044898e80e96f8a0b6, type: 3}
       propertyPath: m_RootOrder
